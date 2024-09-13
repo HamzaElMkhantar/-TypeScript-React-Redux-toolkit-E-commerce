@@ -35,7 +35,7 @@ const cartSlice = createSlice({
       );
     },
     cleanUpCart: (state) => {
-      state.productFullInfo = [];
+      state.productFullInfo = []; 
     },
   },
   extraReducers: (builder) => {
