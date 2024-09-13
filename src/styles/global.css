@@ -1,0 +1,27 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #EFEFEF;
+}
+.active {
+    color: #8fc5e1 !important;
+    border-bottom: 1px solid #8fc5e1;
+}
+
+.notFound {
+    text-align: center;
+    height: 70dvh;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+.notFound h1 {
+    font-size: 130px;
+}
+.notFound p {
+    font-size: 50px;
+}

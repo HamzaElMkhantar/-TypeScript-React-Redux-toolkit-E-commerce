@@ -1,0 +1,23 @@
+.headerContainer {
+    padding: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.headerLogo {
+    font-size: 1.3rem;
+    color: inherit;
+    text-decoration: inherit;
+    margin: 0;
+}
+
+.headerLogo h1 {
+    margin: 0;
+    display: flex;
+}
+
+.headerLogo h1 span {
+    display: flex;
+    margin-right: 5px;
+}

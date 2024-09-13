@@ -1,0 +1,14 @@
+
+.mainL{
+    background-color: #EFEFEF;
+}
+
+.container {
+    min-height: 95dvh;
+    display: flex;
+    flex-direction: column;
+}
+
+.wrapper {
+    margin-top: 0px;
+}
