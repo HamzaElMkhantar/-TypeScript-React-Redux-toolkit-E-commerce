@@ -1,4 +1,7 @@
 {
+  "users": [{
+    "email": "hamzaelmkhantar4@gmail.com"
+  }],
   "categories": [
     {
       "id": "1",
@@ -99,23 +102,13 @@
   ],
   "wishlist": [
     {
-      "id": "3e35",
+      "id": "c1fc",
       "productId": "2",
       "userId": 1
     },
     {
-      "id": "3a9b",
-      "productId": "9",
-      "userId": 1
-    },
-    {
-      "id": "2232",
-      "productId": "1",
-      "userId": 1
-    },
-    {
-      "id": "5495",
-      "productId": "17",
+      "id": "dac0",
+      "productId": "3",
       "userId": 1
     }
   ]

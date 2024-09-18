@@ -30,6 +30,8 @@
       "@utils/*": ["src/utils/*"],
       "@api/*": ["src/api/*"],
       "@customTypes/*": ["src/types/*"],
+      "@validations/*": ["src/validations/*"],
+      "@validations": ["src/validations/index"],
     },
 
     /* Linting */

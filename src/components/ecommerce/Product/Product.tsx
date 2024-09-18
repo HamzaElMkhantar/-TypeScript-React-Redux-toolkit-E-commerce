@@ -41,17 +41,14 @@ const Product = memo(
         .then(() => setIsLoading(false))
         .catch(() => setIsLoading(false));
     };
+
+    console.log("rendering")
     return (
       <Link to="" className={product}>
-        <div onClick={actLikeToggleHandler} className={wishListButton}>
-          {isLoading ? (
-            <Spinner animation="border" size="sm" variant="primary" />
-          ) : !isLiked ? (
-            <Like />
-          ) : (
-            <LikeFull />
-          )}
-        </div>
+        <Button onClick={actLikeToggleHandler} className={wishListButton}>
+          {isLoading && <Spinner animation="border" size="sm" variant="primary" />}
+          {!isLoading && !isLiked ? <Like /> :<LikeFull />}
+        </Button>
         <div className={productImg}>
           <img src={img} alt={title} />
         </div>

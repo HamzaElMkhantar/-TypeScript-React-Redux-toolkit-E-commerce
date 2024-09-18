@@ -1,5 +1,5 @@
 import axiosInstance from "@api/axiosInstance";
-import handleAxiosError from "@api/handleAxiosError";
+import handleAxiosError from "@utils/handleAxiosError";
 import { IWishlistResponse } from "@customTypes/wishlistTypes";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 

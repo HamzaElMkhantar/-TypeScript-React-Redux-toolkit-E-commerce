@@ -1,24 +1,33 @@
-import { Spinner } from "react-bootstrap";
-import { ELoadingState } from "src/types/shared";
+import { ELoadingState } from "@customTypes/shared";
+import CategorySkeleton from "../skeletons/CategorySkeleton/CategorySkeleton";
+import ProductSkeleton from "../skeletons/ProductSkeleton/ProductSkeleton";
+import CartSkeleton from "../skeletons/CartSkeleton/CartSkeleton";
+import LottieHandler from "../LottieHandler/LottieHandler";
+
+const skeletonTypes = {
+  category: CategorySkeleton,
+  product: ProductSkeleton,
+  cart: CartSkeleton,
+};
 
 interface ILoading {
   status: ELoadingState;
   error: string | null;
   children: React.ReactNode;
+  type?: keyof typeof skeletonTypes;
 }
-function Loading({ status, error, children }: ILoading) {
+function Loading({ status, error, children, type = "category" }: ILoading) {
+  const Component = skeletonTypes[type];
+
   if (status === ELoadingState.Pending) {
-    return (
-      <div style={{ width: "100%", textAlign: "center" }}>
-        <Spinner
-          animation="border"
-          style={{ width: "100px", height: "100px" }}
-        />
-      </div>
-    );
+    return <Component />;
   }
   if (error === ELoadingState.Failed) {
-    return <h2>{error}</h2>;
+    return (
+      <div>
+        <LottieHandler type="error" message={error as string} />
+      </div>
+    );
   }
   return <>{children}</>;
 }

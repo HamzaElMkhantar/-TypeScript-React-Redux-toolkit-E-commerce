@@ -1,8 +1,8 @@
-import { ELoadingState } from "src/types/shared";
+import { ELoadingState } from "@customTypes/shared";
 import { createSlice } from "@reduxjs/toolkit";
 import actGetProductsByCatPrefix from "./act(thunk)/actGetProductsByCatPrefix";
 import { IProductsState } from "@customTypes/productsTypes";
-import { handleError } from "@api/handleAxiosError";
+import { handleError } from "@utils/handleAxiosError";
 
 
 const initialState: IProductsState = {
@@ -14,7 +14,7 @@ const productsSlice = createSlice({
   name: "products",
   initialState,
   reducers: {
-    cleanUp: (state) => {
+    cleanUpProduct: (state) => {
       state.records = [];
       state.loading = ELoadingState.Idle;
       state.error = null;
@@ -37,6 +37,6 @@ const productsSlice = createSlice({
   },
 });
 
-export const { cleanUp } = productsSlice.actions;
+export const { cleanUpProduct } = productsSlice.actions;
 export { actGetProductsByCatPrefix };
 export default productsSlice.reducer;

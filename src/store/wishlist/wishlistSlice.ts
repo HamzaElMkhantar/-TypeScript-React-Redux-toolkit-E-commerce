@@ -1,9 +1,9 @@
-import { ELoadingState } from "@customTypes/shared";
 import { IWishlistState } from "@customTypes/wishlistTypes";
 import { createSlice } from "@reduxjs/toolkit";
 import actLikeToggle from "./act(thunk)/actLikeToggle";
-import { handleError } from "@api/handleAxiosError";
+import { handleError } from "@utils/handleAxiosError";
 import actGetWishlist from "./act(thunk)/actGetWishlist";
+import { ELoadingState } from "@customTypes/shared";
 
 const initialState: IWishlistState = {
   itemsIs: [],
@@ -16,8 +16,10 @@ const wishlist = createSlice({
   name: "wishlist",
   initialState,
   reducers: {
-    productsFullInfoCleanUp: (state) => {
+    CleanWishlistProductsFullInfo: (state) => {
         state.productsFullInfo = [];
+        state.loading = ELoadingState.Idle;
+        state.error = null;
     }
   },
   extraReducers: (builder) => {
@@ -61,5 +63,5 @@ const wishlist = createSlice({
 });
 
 export { actLikeToggle, actGetWishlist };
-export const { productsFullInfoCleanUp } = wishlist.actions;
+export const { CleanWishlistProductsFullInfo } = wishlist.actions;
 export default wishlist.reducer;

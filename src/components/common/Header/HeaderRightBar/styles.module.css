@@ -3,6 +3,8 @@
     cursor: pointer;
     align-self: flex-end;
     margin-right: 5px;
+    border-left: 1.5px solid black;
+    padding-left: 10px;
 }
 
 .iconWrapper {

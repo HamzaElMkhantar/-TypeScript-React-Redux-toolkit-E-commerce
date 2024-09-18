@@ -40,21 +40,16 @@
 
 .wishListButton{
     position: absolute;
-    background-color: #ffffff00;
-    padding: 5px;
+    background-color: #fcfcfc00 !important;
+    padding:5px !important;
     top: 7px;
     right: 7px;
     width: 35px;
     height: 35px;
-    border-radius: 5px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    color: red;
     transition: all 0.2s ease-in-out;
+    border: 0!important;
 }
 
 .wishListButton:hover{
-    background-color: #cacaca;
+    background-color: lightgray !important;
 }

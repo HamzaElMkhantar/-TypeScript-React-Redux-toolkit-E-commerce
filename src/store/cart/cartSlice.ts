@@ -1,10 +1,9 @@
 import { ICartState } from "@customTypes/cartTypes";
 import { createSlice } from "@reduxjs/toolkit";
-// import { RootState } from '..';
 import actGetProductsByItems from "./act(thunk)/actGetProductsByItems";
 import { getCartTotalQuantitySelector } from "@store/cart/selectors/cartSelectors";
 import { ELoadingState } from "@customTypes/shared";
-import { handleError } from "@api/handleAxiosError";
+import { handleError } from "@utils/handleAxiosError";
 
 const initialState: ICartState = {
   items: {},
@@ -34,8 +33,10 @@ const cartSlice = createSlice({
         (item) => item.id !== action.payload
       );
     }, 
-    cleanUpCart: (state) => {
+    cleanCartProductFullInfo: (state) => {
       state.productFullInfo = []; 
+      state.loading = ELoadingState.Idle;
+      state.error = null;
     },
   },
   extraReducers: (builder) => {
@@ -56,6 +57,6 @@ const cartSlice = createSlice({
  
 
 export { getCartTotalQuantitySelector, actGetProductsByItems };
-export const { addToCart, cartItemChangeQuantity, removeFromCart, cleanUpCart } =
+export const { addToCart, cartItemChangeQuantity, removeFromCart, cleanCartProductFullInfo } =
   cartSlice.actions;
 export default cartSlice.reducer;

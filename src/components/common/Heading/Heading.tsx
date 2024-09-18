@@ -1,6 +1,8 @@
-import React from "react";
+import {memo} from "react";
 
-const Heading = ({ children }: { children: React.ReactNode }) => {
+const Heading = memo(({ children, title }: { children: React.ReactNode ,title?: string}) => {
+  console.log("Heading")
+
   return (
     <h2
       className="py-1 px-3"
@@ -12,9 +14,9 @@ const Heading = ({ children }: { children: React.ReactNode }) => {
         marginBottom: "40px",
       }}
     >
-      {children}
+      {children}{title &&`(${title})`}
     </h2>
   );
-};
+});
 
 export default Heading;

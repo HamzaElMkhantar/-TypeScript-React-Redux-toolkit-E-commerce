@@ -1,5 +1,5 @@
 import axiosInstance from "@api/axiosInstance";
-import { handleError } from "@api/handleAxiosError";
+import { handleError } from "@utils/handleAxiosError";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { RootState } from "@store/index";
 
@@ -7,7 +7,7 @@ import { TProductResponse } from "@customTypes/productsTypes";
 
 type TResponse = TProductResponse[];
 const actGetWishlist = createAsyncThunk("getWishlist", async (_, thunkAPI) => {
-  const { rejectWithValue, fulfillWithValue, getState } = thunkAPI;
+  const { rejectWithValue, fulfillWithValue, getState, signal } = thunkAPI;
   const {
     wishlist: { itemsIs },
   } = getState() as RootState;
@@ -21,8 +21,10 @@ const actGetWishlist = createAsyncThunk("getWishlist", async (_, thunkAPI) => {
     await Promise.all(
       itemsIs.map(async (el) => {
         const response = await axiosInstance.get<TResponse>(
-          `/products?id=${el}`
+          `/products?id=${el}`,
+          { signal }
         );
+
         const { data } = response;
         res = [...res, ...data];
       })

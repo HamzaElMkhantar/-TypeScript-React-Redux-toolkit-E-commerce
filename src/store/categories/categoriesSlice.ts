@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { ICategoriesState } from "../../types/categoriesTypes";
 import { ELoadingState } from "../../types/shared";
 import actGetCategories from "./act(thunk)/actGetCatgories";
-import { handleError } from "@api/handleAxiosError";
+import { handleError } from "@utils/handleAxiosError";
 
 
 const initialState: ICategoriesState = {

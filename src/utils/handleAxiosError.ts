@@ -1,3 +1,4 @@
+import { isString } from "@customTypes/guards";
 import axios from "axios";
 
 const handleAxiosError = (e: unknown) => {
@@ -12,7 +13,7 @@ export default handleAxiosError;
 
 // Error handling utility function
 export const handleError = (payload: unknown): string => {
-  if (payload && typeof payload === "string") {
+  if (isString(payload)) {
     return payload;
   }
   return "An unexpected error occurred";

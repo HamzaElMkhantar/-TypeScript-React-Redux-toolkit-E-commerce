@@ -9,4 +9,5 @@ export enum ELoadingState {
 export type TGridListProps<T> = {
     records: T[];
     render: (record: T) => React.ReactNode;
+    emptyMessage: string;
   };

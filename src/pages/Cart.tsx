@@ -1,47 +1,13 @@
 import { Heading } from "@components/common";
 import { CartItemList, CartSubtotalPrice } from "@components/ecommerce";
+import { LottieHandler } from "@components/feedback";
 import Loading from "@components/feedback/Loading/Loading";
-
+import useCart from "@hooks/useCart";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
-import {
-  actGetProductsByItems,
-  cartItemChangeQuantity,
-  cleanUpCart,
-  removeFromCart,
-} from "@store/cart/cartSlice";
-import { useAppDispatch, useAppSelector } from "@store/hooks";
-import { useCallback, useEffect } from "react";
 
 function Cart() {
-  const dispatch = useAppDispatch();
-  const { items, productFullInfo, loading, error } = useAppSelector(
-    (state) => state.cart
-  );
-  useEffect(() => {
-    dispatch(actGetProductsByItems());
-
-    return () => {
-      dispatch(cleanUpCart());
-    };
-  }, [dispatch, items]);
-
-  const products = productFullInfo.map((el) => ({
-    ...el,
-    quantity: items[el.id],
-  }));
-  const changeQuantityHandler = useCallback(
-    (id: number, quantity: number) => {
-      dispatch(cartItemChangeQuantity({ id, quantity }));
-    },
-    [dispatch]
-  );
-
-  const removeItemHandler = useCallback(
-    (id: number) => {
-      dispatch(removeFromCart(id));
-    },
-    [dispatch]
-  );
+  const { loading, error, products, changeQuantityHandler, removeItemHandler } =
+    useCart();
 
   return (
     <>
@@ -52,7 +18,7 @@ function Cart() {
         />
         Cart
       </Heading>
-      <Loading status={loading} error={error}>
+      <Loading status={loading} error={error} type="cart">
         {products.length > 0 ? (
           <>
             <CartItemList
@@ -63,7 +29,7 @@ function Cart() {
             <CartSubtotalPrice products={products} />
           </>
         ) : (
-          <p>Your cart is Empty</p>
+          <LottieHandler type="empty" message="Your cart is Empty" />
         )}
       </Loading>
     </>

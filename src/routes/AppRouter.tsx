@@ -1,30 +1,45 @@
+import { lazy } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 // ? layouts
-import { MainLayout } from "@layouts/index";
+const MainLayout = lazy(() => import("@layouts/index"));
 // ? pages
-import Home from "@pages/Home";
-import Cart from "@pages/Cart";
-import Products from "@pages/Products";
-import Categories from "@pages/Categories";
-import AboutUs from "@pages/AboutUs";
-import Login from "@pages/Login";
-import Register from "@pages/Register";
+const Home = lazy(() => import("@pages/Home"));
+const Cart = lazy(() => import("@pages/Cart"));
+const Products = lazy(() => import("@pages/Products"));
+const Categories = lazy(() => import("@pages/Categories"));
+const AboutUs = lazy(() => import("@pages/AboutUs"));
+const Login = lazy(() => import("@pages/Login"));
+const Register = lazy(() => import("@pages/Register"));
+const WishList = lazy(() => import("@pages/WishList"));
 import Error from "@pages/Error";
-import WishList from "@pages/WishList";
+import PageSuspense from "@components/feedback/Suspense/PageSuspense";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <MainLayout />,
+    element: (
+      <PageSuspense main={true}>
+        {" "}
+        <MainLayout />
+      </PageSuspense>
+    ),
     errorElement: <Error />,
     children: [
       {
         index: true,
-        element: <Home />,
+        element: (
+          <PageSuspense>
+            <Home />
+          </PageSuspense>
+        ),
       },
       {
         path: "/products/:prefix",
-        element: <Products />,
+        element: (
+          <PageSuspense>
+            <Products />
+          </PageSuspense>
+        ),
         loader: ({ params }) => {
           if (
             typeof params.prefix !== "string" ||
@@ -40,27 +55,51 @@ const router = createBrowserRouter([
       },
       {
         path: "/categories",
-        element: <Categories />,
+        element: (
+          <PageSuspense>
+            <Categories />
+          </PageSuspense>
+        ),
       },
       {
         path: "/about-us",
-        element: <AboutUs />,
+        element: (
+          <PageSuspense>
+            <AboutUs />
+          </PageSuspense>
+        ),
       },
       {
         path: "/login",
-        element: <Login />,
+        element: (
+          <PageSuspense>
+            <Login />
+          </PageSuspense>
+        ),
       },
       {
         path: "/register",
-        element: <Register />,
+        element: (
+          <PageSuspense>
+            <Register />
+          </PageSuspense>
+        ),
       },
       {
         path: "/cart",
-        element: <Cart />,
+        element: (
+          <PageSuspense>
+            <Cart />
+          </PageSuspense>
+        ),
       },
       {
         path: "/wishlist",
-        element: <WishList />,
+        element: (
+          <PageSuspense>
+            <WishList />
+          </PageSuspense>
+        ),
       },
     ],
   },
