@@ -20,7 +20,7 @@ const cartSlice = createSlice({
       const id = action.payload;
       if (state.items[id]) {
         state.items[id]++;
-      }
+      } 
       if (!state.items[id]) {
         state.items[id] = 1;
       }
