@@ -3,7 +3,7 @@ import axios from "axios";
 
 const handleAxiosError = (e: unknown) => {
   if (axios.isAxiosError(e)) {
-    return e.response?.data.message || e.message;
+    return e.response?.data || e.response?.data.message || e.message;
   }
   return "An error occurred while processing the request";
 };

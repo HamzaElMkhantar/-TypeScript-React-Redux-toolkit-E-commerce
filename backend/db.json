@@ -1,7 +1,62 @@
 {
-  "users": [{
-    "email": "hamzaelmkhantar4@gmail.com"
-  }],
+  "users": [
+    {
+      "email": "hamzaelmkhantar4@gmail.com",
+      "password": "$2a$10$VkOHLjBS6n5JkMayO4PqVuPCfWvUXCnihj1Gs9R2hXkcPdijZb/jq",
+      "firstName": "Hamza",
+      "lastName": "ElMkhantar",
+      "id": 1
+    },
+    {
+      "email": "hamzaelmkhantar1@gmail.com",
+      "password": "$2a$10$SCJQqBiusW1pIDwy09vCGOL7CmWDnawdRWrxd.PH.CHJhCFtx9ZIm",
+      "firstName": "Hamza",
+      "lastName": "ElMkhantar",
+      "id": 2
+    },
+    {
+      "email": "hamza_elmkhantar@gmail.com",
+      "password": "$2a$10$38DNrhzlcAYsgJuYGrPv.OkAeeYZE62py/bC5RKQ.SR9ebNBMQyye",
+      "firstName": "Hamza",
+      "lastName": "ElMkhantar",
+      "id": 3
+    },
+    {
+      "email": "hamza.elmkhantar@gmail.com",
+      "password": "$2a$10$uRsywkVnKH2CndeZUf5lCOE7Pzl1aUggpis5TJ8yLMwc9TF.8bKQ.",
+      "firstName": "Hamza",
+      "lastName": "ElMkhantar",
+      "id": 4
+    },
+    {
+      "email": "hamzaelmkhantar@gmail.com",
+      "password": "$2a$10$D2.1lB6e/Y3kHFnz7wrgUen09Yjrt5tRs8ndjRDv4hpe59TVofMNC",
+      "firstName": "Hamza",
+      "lastName": "ElMkhantar",
+      "id": 5
+    },
+    {
+      "email": "hamzaelmkhantar2@gmail.com",
+      "password": "$2a$10$FHzEvitEgNdtEXs5T.yeFe8.fpxhb5EpQXK6.2caZ1vu2D2Yq30be",
+      "firstName": "Hamza",
+      "lastName": "ElMkhantar",
+      "id": 6
+    },
+    {
+      "email": "hamzaelmkhantar3@gmail.com",
+      "password": "$2a$10$9quB65OzEujXURXMoNSG/.9ZX91JSAx5Q4U5Ixv5fSL08LWFSxYVm",
+      "firstName": "Hamza",
+      "lastName": "ElMkhantar",
+      "id": 7
+    },
+    {
+      "email": "hamzaelmkhantar5@gmail.com",
+      "password": "$2a$10$Qsn2Y8/ML7pc5dv3mOlwP.43jq8THdK/YIp/H95aCW7u43f.LU/jG",
+      "firstName": "Hamza",
+      "lastName": "ElMkhantar",
+      "id": 8
+    }
+  ],
   "categories": [
     {
       "id": "1",

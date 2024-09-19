@@ -1,11 +1,33 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import styles from "./styles.module.css";
-import { Badge, Navbar, Container, Nav } from "react-bootstrap";
+import {
+  Badge,
+  Navbar,
+  Container,
+  Nav, 
+  NavDropdown,
+  Spinner,
+} from "react-bootstrap";
 import HeaderRightBar from "./HeaderRightBar/HeaderRightBar";
+import { useAppDispatch, useAppSelector } from "@store/hooks";
+import { authLogout } from "@store/auth/authSlice";
+import { useState } from "react";
 
 const { headerContainer, headerLogo } = styles;
 
 function Header() {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const [pendingLogout, setPendingLogout] = useState(false);
+  const { user, accessToken } = useAppSelector((state) => state.auth);
+  const handleLogout = () => {
+    setPendingLogout(true);
+    setTimeout(() => {
+      dispatch(authLogout());
+      navigate("/");
+      setPendingLogout(false);
+    }, 1000);
+  };
   return (
     <header>
       <div className={headerContainer}>
@@ -38,12 +60,36 @@ function Header() {
             </Nav>
 
             <Nav className="">
-              <Nav.Link as={NavLink} to="login">
-                Login
-              </Nav.Link>
-              <Nav.Link as={NavLink} to="register">
-                Register
-              </Nav.Link>
+              {!accessToken && (
+                <>
+                  <Nav.Link as={NavLink} to="login">
+                    Login
+                  </Nav.Link>
+                  <Nav.Link as={NavLink} to="register">
+                    Register
+                  </Nav.Link>
+                </>
+              )}
+
+              {accessToken && (
+                <>
+                {pendingLogout && <Nav.Link style={{color:'white'}}>
+                <Spinner animation="border" size="sm" style={{color:'white'}} /> Logout
+              </Nav.Link>}
+                
+                <NavDropdown
+                  title={`Welcome: ${user?.firstName} ${user?.lastName}`}
+                  id="dropdown-basic"
+                >
+                  <NavDropdown.Item as={NavLink} to="/profile">Profile</NavDropdown.Item>
+                  <NavDropdown.Item>Orders</NavDropdown.Item>
+                  <NavDropdown.Divider />
+                  <NavDropdown.Item onClick={handleLogout}>
+                    Logout
+                  </NavDropdown.Item>
+                </NavDropdown>
+                </>
+              )}
             </Nav>
           </Navbar.Collapse>
         </Container>

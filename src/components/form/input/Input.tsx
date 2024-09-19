@@ -11,7 +11,7 @@ type TInputProps<TFieldValue extends FieldValues> = {
   formText?: string;
   success?: string;
   disabled?: boolean;
-}; 
+};
 const Input = <TFieldValue extends FieldValues>({
   label,
   name,
@@ -21,7 +21,7 @@ const Input = <TFieldValue extends FieldValues>({
   onBlur,
   formText,
   success,
-  disabled
+  disabled,
 }: TInputProps<TFieldValue>) => {
   const onBlurHandler = (e: React.FocusEvent<HTMLInputElement>) => {
     if (onBlur) {
@@ -44,7 +44,7 @@ const Input = <TFieldValue extends FieldValues>({
       />
       <Form.Control.Feedback type="invalid">{error}</Form.Control.Feedback>
       <Form.Control.Feedback type="valid">{success}</Form.Control.Feedback>
-      {formText && <Form.Text muted>{formText}</Form.Text>} 
+      {formText && <Form.Text muted>{formText}</Form.Text>}
     </Form.Group>
   );
 };

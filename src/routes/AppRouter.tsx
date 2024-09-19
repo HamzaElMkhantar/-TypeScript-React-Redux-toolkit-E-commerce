@@ -11,8 +11,11 @@ const AboutUs = lazy(() => import("@pages/AboutUs"));
 const Login = lazy(() => import("@pages/Login"));
 const Register = lazy(() => import("@pages/Register"));
 const WishList = lazy(() => import("@pages/WishList"));
+const Profile = lazy(() => import("@pages/Profile"));
 import Error from "@pages/Error";
 import PageSuspense from "@components/feedback/Suspense/PageSuspense";
+import IsNotAuth from "../components/auth/ProtectRoutes/IsNotAuth";
+import IsAuth from "@components/auth/ProtectRoutes/IsAuth";
 
 const router = createBrowserRouter([
   {
@@ -72,17 +75,21 @@ const router = createBrowserRouter([
       {
         path: "/login",
         element: (
-          <PageSuspense>
-            <Login />
-          </PageSuspense>
+          <IsNotAuth>
+            <PageSuspense>
+              <Login />
+            </PageSuspense>
+          </IsNotAuth>
         ),
       },
       {
         path: "/register",
         element: (
-          <PageSuspense>
-            <Register />
-          </PageSuspense>
+          <IsNotAuth>
+            <PageSuspense>
+              <Register />
+            </PageSuspense>
+          </IsNotAuth>
         ),
       },
       {
@@ -96,9 +103,21 @@ const router = createBrowserRouter([
       {
         path: "/wishlist",
         element: (
-          <PageSuspense>
-            <WishList />
-          </PageSuspense>
+          <IsAuth>
+            <PageSuspense>
+              <WishList />
+            </PageSuspense>
+          </IsAuth>
+        ),
+      },
+      {
+        path: "/profile",
+        element: (
+          <IsAuth>
+            <PageSuspense>
+              <Profile />
+            </PageSuspense>
+          </IsAuth>
         ),
       },
     ],

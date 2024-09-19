@@ -1,9 +1,14 @@
-import { SubmitHandler } from "react-hook-form";
-import { Form, Button, Container } from "react-bootstrap";
+import { FieldErrors, SubmitHandler } from "react-hook-form";
+import { Form, Button, Container, Spinner } from "react-bootstrap";
 import { signUpSchema, TSingUpType } from "@validations";
 import { Input } from "@components/form";
 import useCostumeForm from "@hooks/useCostumeForm";
 import useCheckEmailAvailability from "../hooks/useCheckEmailAvailability";
+import { useAppDispatch, useAppSelector } from "@store/hooks";
+import { actAuthRegister, cleanUpRegister } from "@store/auth/authSlice";
+import { useEffect } from "react";
+import {  useNavigate } from "react-router-dom";
+type TStatus = "idle" | "checking" | "available" | "notAvailable" | "failed";
 
 function Register() {
   const {
@@ -14,8 +19,13 @@ function Register() {
     trigger,
   } = useCostumeForm<TSingUpType>(signUpSchema);
 
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  const { loading, error } = useAppSelector((state) => state.auth);
+
   const submitForm: SubmitHandler<TSingUpType> = (data) => {
-    console.log(data);
+    const { firstName, lastName, email, password } = data;
+    dispatch(actAuthRegister({ firstName, lastName, email, password }));
   };
 
   const {
@@ -40,8 +50,46 @@ function Register() {
       resetCheckEmailAvailability();
     }
   };
+  useEffect(() => {
+    if (loading === "pending") {
+      navigate("/login?message=success");
+    }
+
+    // return () => {
+    //   dispatch(cleanUpRegister())
+    // }
+  }, [loading, navigate]);
+
+  // not working clean up states
+  useEffect(() => {
+    return () => {
+      dispatch(cleanUpRegister());
+    };
+  }, [dispatch]);
+
+  const handleEmailErrStatus = (err: FieldErrors, status: TStatus) => {
+    const error = err.email?.message;
+    if (error) {
+      return error as string;
+    } else if (status === "notAvailable") {
+      return "this email already in use.";
+    } else if (status === "failed") {
+      return "Internal Server Error";
+    } else {
+      return "";
+    }
+  };
+
+  // if(accessToken){
+  //   return <Navigate to="/" />
+  // }
   return (
     <Container>
+      {error && (
+        <div className="alert alert-danger mt-2" role="alert">
+          {error}
+        </div>
+      )}
       <h3 style={{ textAlign: "center" }} className="my-3">
         User Registration
       </h3>
@@ -66,15 +114,7 @@ function Register() {
           label="Email address"
           name="email"
           register={register}
-          error={
-            errors.email?.message
-              ? errors.email?.message
-              : emailAvailabilityStatus === "notAvailable"
-              ? "this email already in use."
-              : emailAvailabilityStatus === "failed"
-              ? "Internal Server Error"
-              : ""
-          }
+          error={handleEmailErrStatus(errors, emailAvailabilityStatus)}
           onBlur={emailOnBlurHandler}
           formText={
             emailAvailabilityStatus === "checking"
@@ -103,13 +143,17 @@ function Register() {
           error={errors.confirmPassword?.message}
         />
 
-        <Button
-          variant="primary"
-          type="submit"
-          disabled={emailAvailabilityStatus === "checking"}
-        >
-          Submit
-        </Button>
+        {loading === "pending" ? (
+          <Spinner animation="border" variant="primary" />
+        ) : (
+          <Button
+            variant="primary"
+            type="submit"
+            disabled={emailAvailabilityStatus === "checking"}
+          >
+            Submit
+          </Button>
+        )}
       </Form>
     </Container>
   );
