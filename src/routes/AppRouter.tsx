@@ -20,7 +20,7 @@ import IsAuth from "@components/auth/ProtectRoutes/IsAuth";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: (
+    element: ( 
       <PageSuspense main={true}>
         {" "}
         <MainLayout />
